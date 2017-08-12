@@ -3,7 +3,7 @@
     <h1 class="logo">Welcome in rent car system <br> Car for any pocket</h1>
     <div id="logIndiv">
         <a id="logIn" href="loginPage.php">Log In</a>
-        <a id="signIn" href="signinPage.php">Sign In</a>
+        <a id="signIn" href="signInPage.php">Sign In</a>
     </div>
     <nav id="topnav">
         <ul class="menu">

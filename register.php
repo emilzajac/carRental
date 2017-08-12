@@ -3,11 +3,17 @@ session_start();
 include 'databaseConnection.php';
 /* Registration process, inserts user info into the database */
 
+$_SESSION['firstName'] = $_POST['firstName'];
+$_SESSION['lastName'] = $_POST['lastName'];
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['password'] = $_POST['password'];
+$_SESSION['dateOfBirth'] = $_POST['dateOfBirth'];
+$_SESSION['gender'] = $_POST['gender'];
+$_SESSION['location'] = $_POST['location'];
+
 $dateOfBirth = $_SESSION['dateOfBirth'];
 $gender = $_SESSION['gender'];
 $location = $_SESSION['location'];
-
-$carId = $_SESSION['car_id'];
 
 // Escape $_POST variables to protect against SQL injections
 $first_name = $mysqliConnect->escape_string($_POST['firstName']);
@@ -21,19 +27,23 @@ $result = $mysqliConnect->query("SELECT * FROM users WHERE email='$email'") or d
 // We know user email exists if the rows returned are more than 0
 if ( $result->num_rows > 0 ) {
     $_SESSION['error_email'] = "An account with this email already exists";
-    header("location: rentStep3.php");
+    if (isset($_POST['registerFromHomePage'])) {
+        header("location: signInPage.php");
+    }else{
+        header("location: rentStep3.php");
+    }
     exit();
-
 }
+
 else { // Email doesn't already exist in a database, proceed...
     $sql = "INSERT INTO users (first_name, last_name, email, date_of_birth, password, gender, location) "
         . "VALUES ('$first_name','$last_name','$email','$dateOfBirth','$password','$gender','$location')";
     // Add user to the database
-    if ( $mysqliConnect->query($sql) ) {
-        $_SESSION['logged_in'] = true; // So we know the user has logged in
-    }
-    else {
+    if ( !$mysqliConnect->query($sql) ) {
         echo "Registration falied";
+    }else{
+        $_SESSION['message'] = "You can now rent a car, go to Home page and make a reservation";
+        header("location: success.php");
     }
 }
 

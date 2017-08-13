@@ -27,7 +27,7 @@ if ( $_SESSION['logged_in'] != 1 ) {
 
 </head>
 <body>
-<!--<img id="myImageBackground" src="img/1198.jpg" alt="">-->
+<img id="myImageBackground" src="img/1198.jpg" alt="">
     <div id="wrapper">
         <div class="form" id="user_profile_form">
           <div id="top_information">
@@ -93,17 +93,17 @@ if ( $_SESSION['logged_in'] != 1 ) {
                             <tr>
                                 <td>First name:</td>
                                 <td><?php echo $_SESSION['firstName'] ?></td>
-                                <td><input type="text" name="firstName" value="" ></td>
+                                <td><input type="text" name="firstNameChange" value="" ></td>
                             </tr>
                             <tr>
                                 <td>Last name:</td>
                                 <td><?php echo $_SESSION['lastName'] ?></td>
-                                <td><input type="text" name="lastName" value="" ></td>
+                                <td><input type="text" name="lastNameChange" value="" ></td>
                             </tr>
                             <tr>
                                 <td>E-mail address:</td>
                                 <td><?php echo $_SESSION['email'] ?></td>
-                                <td><input type="text" name="email" value="" ></td>
+                                <td><input type="text" name="emailChange" value="" ></td>
                             </tr>
                             <?php
                             if (isset($_SESSION['error_email'])) {
@@ -114,17 +114,17 @@ if ( $_SESSION['logged_in'] != 1 ) {
                             <tr id="password_label">
                                 <td>Password:</td>
                                 <td>********</td>
-                                <td><input type="text" name="password" value="" ></td>
+                                <td><input type="password" name="passwordChange" value="" ></td>
                             </tr>
                             <tr id="dateOfBirth_label">
                                 <td>Date of birth:</td>
                                 <td><?php echo $_SESSION['dateOfBirth'] ?></td>
-                                <td><input type="date" name="dateOfBirth" value="" ></td>
+                                <td><input type="date" name="dateOfBirthChange" value="" ></td>
                             </tr>
                             <tr id="gender_select">
                                 <td>Gender:</td>
                                 <td><?php echo $_SESSION['gender'] ?></td>
-                                <td><select required id="gender_option" name="gender" >
+                                <td><select required id="gender_option" name="genderChange" >
                                         <option> Select Gender </option>
                                         <option> Male </option>
                                         <option> Female </option>
@@ -134,7 +134,7 @@ if ( $_SESSION['logged_in'] != 1 ) {
                             <tr id="location_label">
                                 <td>Location:</td>
                                 <td><?php echo $_SESSION['location'] ?></td>
-                                <td><input type="text" name="location" value="" ></td>
+                                <td><input type="text" name="locationChange" value="" ></td>
                             </tr>
                         </table>
                         <button class="button" type="submit" name="changePersonalDataButton" >CONFIRM</button>

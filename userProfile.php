@@ -4,6 +4,7 @@ session_start();
 include 'databaseConnection.php';
 include 'hireData.php';
 include 'carsData.php';
+print_r($_SESSION);
 
 // Check if user is logged in using the session variable
 if ( $_SESSION['logged_in'] != 1 ) {
@@ -17,12 +18,16 @@ if ( $_SESSION['logged_in'] != 1 ) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="javaScript/jquery.js"></script>
+    <script src="javaScript/jsScript.js"></script>
+    
   <title>Profile</title>
 
 </head>
 <body>
-<img id="myImageBackground" src="img/1198.jpg" alt="">
+<!--<img id="myImageBackground" src="img/1198.jpg" alt="">-->
     <div id="wrapper">
         <div class="form" id="user_profile_form">
           <div id="top_information">
@@ -31,6 +36,10 @@ if ( $_SESSION['logged_in'] != 1 ) {
               <p id="display_email"><?php echo $_SESSION['email'] ?></p>
               <h3>Below are your current rent car details and reservation</h3>
           </div>
+            <a id="logOutdiv" href="logout.php"><button class="button" name="logout">Log out</button></a>
+            <div id="personalDataChangeDiv">
+                Personal settings: <button id="personalSettingsButton" class="button">change</button>
+            </div>
             <div class="carsSection">
               <?php
               $query_hire = "SELECT * FROM hire WHERE client_id='$_SESSION[clientId]'";
@@ -76,9 +85,67 @@ if ( $_SESSION['logged_in'] != 1 ) {
                 <?php }while($carData = $result_car->fetch_assoc());
                 }while($hireData = $result_hire->fetch_assoc()); ?>
             </div>
-          <a id="logIndiv" href="logout.php"><button class="button" name="logout">Log out</button></a>
+            <div id="personal_data">
+                <div>
+                    <h3>Your personal data</h3>
+                    <form action="changePersonalData.php" method="post">
+                        <table>
+                            <tr>
+                                <td>First name:</td>
+                                <td><?php echo $_SESSION['firstName'] ?></td>
+                                <td><input type="text" name="firstName" value="" ></td>
+                            </tr>
+                            <tr>
+                                <td>Last name:</td>
+                                <td><?php echo $_SESSION['lastName'] ?></td>
+                                <td><input type="text" name="lastName" value="" ></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail address:</td>
+                                <td><?php echo $_SESSION['email'] ?></td>
+                                <td><input type="text" name="email" value="" ></td>
+                            </tr>
+                            <?php
+                            if (isset($_SESSION['error_email'])) {
+                                echo '<tr> <th colspan="2" class = "error"> ' . $_SESSION['error_email'] . ' </th> </tr>';
+                                unset($_SESSION['error_email']);
+                            }
+                            ?>
+                            <tr id="password_label">
+                                <td>Password:</td>
+                                <td>********</td>
+                                <td><input type="text" name="password" value="" ></td>
+                            </tr>
+                            <tr id="dateOfBirth_label">
+                                <td>Date of birth:</td>
+                                <td><?php echo $_SESSION['dateOfBirth'] ?></td>
+                                <td><input type="date" name="dateOfBirth" value="" ></td>
+                            </tr>
+                            <tr id="gender_select">
+                                <td>Gender:</td>
+                                <td><?php echo $_SESSION['gender'] ?></td>
+                                <td><select required id="gender_option" name="gender" >
+                                        <option> Select Gender </option>
+                                        <option> Male </option>
+                                        <option> Female </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr id="location_label">
+                                <td>Location:</td>
+                                <td><?php echo $_SESSION['location'] ?></td>
+                                <td><input type="text" name="location" value="" ></td>
+                            </tr>
+                        </table>
+                        <button class="button" type="submit" name="changePersonalDataButton" >CONFIRM</button>
+                        <button class="button" id="personalSettingsCancelButton" type="button">CANCEL</button>
+                    </form>
+                    <br>
+                    
+                </div>
+            </div>
     </div>
         <footer> Copyright &copy; <?php echo date("Y")?> All Rights Reserved | Designed by Emil Zając.</footer>
 </div>
 </body>
-</html>
+</html> 

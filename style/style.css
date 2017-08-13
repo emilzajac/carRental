@@ -24,7 +24,7 @@ h1.logo {
     position: absolute;
     top: 20px;
     height: 80px;
-    right: 10px;
+    right: 20px;
 }
 #logIn, #signIn{
     display: inline-block;
@@ -110,6 +110,7 @@ h1.logo {
     max-width: 1200px;
     margin: 0 auto 0 auto;
     background-color: rgba(49, 49, 49, 0.86);
+    color: #ffffff;
 }
 
 header img {
@@ -266,6 +267,7 @@ h2 {
 
 #log_out_form.form button {
     margin: 20px auto 10px auto;
+    
 }
 
 #success_form.form{
@@ -281,6 +283,7 @@ h2 {
 #user_profile_form.form{
     padding: 20px 0 20px 0;
     text-align: center;
+    color: #ffffff;
 
 }
 
@@ -299,6 +302,42 @@ h2 {
 
 .checkbox{
     padding: 5px;
+}
+
+#personal_data{
+    /*width: 300px;*/
+    /*height: 300px;*/
+    background-color: #4c6310;
+    position: absolute;
+    padding: 20px;
+    left: 25%;
+    top: 25%;
+    /*width: 50%;*/
+    text-align: center;
+    font-size: 18px;
+    /*display: none;*/
+}
+
+#personal_data > input{
+    width: 120px;
+}
+
+#personalDataChangeDiv{
+    display: block;
+    position: absolute;
+    top: 20px;
+    width: 150px;
+    margin: 5px auto 5px auto;
+    
+}
+
+#logOutdiv{
+    display: block;
+    width: auto;
+    position: absolute;
+    top: 45px;
+    height: 80px;
+    right: 15px;
 }
 
 .error

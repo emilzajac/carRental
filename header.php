@@ -7,7 +7,7 @@
     </div>
     <nav id="topnav">
         <ul class="menu">
-            <li><a href="Index.php">Home</a></li>
+            <li><a href="Index.php">Search car</a></li>
             <li><a href="cars.php">Cars</a></li>
             <li><a href="about.php">About</a></li>
             <li><a href="contact.php">Contact</a></li>

@@ -4,7 +4,7 @@ session_start();
 include 'databaseConnection.php';
 include 'hireData.php';
 include 'carsData.php';
-print_r($_SESSION);
+//print_r($_SESSION);
 
 // Check if user is logged in using the session variable
 if ( $_SESSION['logged_in'] != 1 ) {
@@ -45,12 +45,10 @@ if ( $_SESSION['logged_in'] != 1 ) {
               $query_hire = "SELECT * FROM hire WHERE client_id='$_SESSION[clientId]'";
               $result_hire = $mysqliConnect->query($query_hire);
               $hireData = $result_hire->fetch_assoc();
-
               do{
                   $query_car = "SELECT * FROM cars WHERE car_id='$hireData[car_id]'";
                   $result_car = $mysqliConnect->query($query_car);
                   $carData = $result_car->fetch_assoc();
-
                   do{
                   ?>
                   <div class="gridCar">
@@ -81,6 +79,10 @@ if ( $_SESSION['logged_in'] != 1 ) {
                           <span>Number of rental days: <?php echo $hireData['number_of_rental_days'];?></span> <br>
                           <span>Total price: <?php echo $hireData['total_price']." PLN";?></span> <br>
                       </div>
+                      <a id="carSelectButton"
+                         href="deleteReservation.php?car_id=<?php echo $carData['car_id']; ?>">
+                          <button class="button" type="submit" name="deleteCarButton" >DELETE RESERVATION</button>
+                      </a>
                   </div>
                 <?php }while($carData = $result_car->fetch_assoc());
                 }while($hireData = $result_hire->fetch_assoc()); ?>

@@ -60,7 +60,7 @@ if (!empty($_POST['firstNameChange']) || !empty($_POST['lastNameChange']) || !em
         $_SESSION['dateOfBirth'] = $_POST['dateOfBirthChange'];
         
     }
-    if (!empty($_POST['genderChange'])) {
+    if (!empty($_POST['genderChange']) and $_POST['genderChange'] != "Select Gender") {
         $sql = "UPDATE users SET gender = '$_POST[genderChange]' WHERE client_id = '$_SESSION[clientId]'";
         if (!$mysqliConnect->query($sql)) {
             echo "Problem with updating ";

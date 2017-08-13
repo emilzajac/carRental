@@ -1,5 +1,4 @@
 <?php
-session_start();
 //Assignment of stored data to variable
 $startPlace = $_SESSION['startPlace'];
 $finishPlace = $_SESSION['finishPlace'];
@@ -20,8 +19,7 @@ $result = $mysqliConnect->query("SELECT * FROM users WHERE email='$email' AND fi
 
 if ( $result->num_rows == 0 ){ // User doesn't exist
     echo "User doesn't exist!";
-}
-else { // User exists
+}else { // User exists
     $user = $result->fetch_assoc();
 
     if ( password_verify($_SESSION['password'], $user['password']) ) {

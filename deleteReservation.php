@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'databaseConnection.php';
-print_r($_GET);
 
 if (!empty($_GET['car_id'])) {
     //Deleting reservation in database
@@ -14,7 +13,6 @@ if (!empty($_GET['car_id'])) {
     if (!$mysqliConnect->query($sql)) {
         echo "Problem with updating status in deleting reservation";
     }
-    //    header("location: userProfile.php");
-    }else{
+}else{
     echo 'error with deleting reservation';
 }

@@ -342,10 +342,14 @@ h2 {
     right: 15px;
 }
 
+#goToHomePageDiv{
+    margin: 5px auto 5px auto;
+}
+
 .error
 {
     font-size: small;
-    color: red;
+    color: #cc0000;
     margin-top: 10px;
     margin-bottom: 10px;
 }

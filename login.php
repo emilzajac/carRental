@@ -3,13 +3,20 @@ session_start();
 require 'databaseConnection.php';
 /* User login process, checks if user exists and password is correct */
 
+// If one of entered data in loginPage is incorrect, remember not to type again
+if (!empty($_POST['email']) or ! empty($_POST['password'])) {
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['password'] = $_POST['password'];
+}
+
 // Escape email to protect against SQL injections
 $email = $mysqliConnect->escape_string($_POST['email']);
 
 $result = $mysqliConnect->query("SELECT * FROM users WHERE email='$email'");
 
 if ( $result->num_rows == 0 ){ // User doesn't exist
-    echo "User with that email doesn't exist!";
+    $_SESSION['error_email'] = "User with that email doesn't exist!";
+    header("location: loginPage.php");
 }
 else { // User exists
     $user = $result->fetch_assoc();
@@ -32,7 +39,8 @@ else { // User exists
         header("location: userProfile.php");
     }
     else {
-       echo "You have entered wrong password, try again!";
+        $_SESSION['error_password'] = "You have entered wrong password, try again!";
+        header("location: loginPage.php");
     }
 }
 ?>

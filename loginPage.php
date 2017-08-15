@@ -33,10 +33,22 @@ require 'databaseConnection.php';
                                 unset($_SESSION['email']);
                             }
                             ?>" required></td>
+                        <?php
+                        if (isset($_SESSION['error_email'])) {
+                            echo '<tr> <th colspan="2" class = "error"> ' . $_SESSION['error_email'] . ' </th> </tr>';
+                            unset($_SESSION['error_email']);
+                        }
+                        ?>
                     </tr>
                     <tr id="password_label">
                         <td>Password:</td>
                         <td><input id="password_input" type="password" name="password"  required></td>
+                        <?php
+                        if (isset($_SESSION['error_password'])) {
+                            echo '<tr> <th colspan="2" class = "error"> ' . $_SESSION['error_password'] . ' </th> </tr>';
+                            unset($_SESSION['error_password']);
+                        }
+                        ?>
                     </tr>
                 </table>
                     <button class="button" type="submit" name="login" >Log In</button>

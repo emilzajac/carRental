@@ -2,9 +2,6 @@
 /* Displays user information and some useful messages */
 session_start();
 include 'databaseConnection.php';
-include 'hireData.php';
-include 'carsData.php';
-//print_r($_SESSION);
 
 // Check if user is logged in using the session variable
 if ( $_SESSION['logged_in'] != 1 ) {
@@ -36,9 +33,15 @@ if ( $_SESSION['logged_in'] != 1 ) {
               <p id="display_email"><?php echo $_SESSION['email'] ?></p>
               <h3>Below are your current rent car details and reservation</h3>
           </div>
-            <a id="logOutdiv" href="logout.php"><button class="button" name="logout">Log out</button></a>
+            <a id="logOutdiv" href="logout.php"><button class="button" name="logout">LOG OUT</button></a>
             <div id="personalDataChangeDiv">
-                Personal settings: <button id="personalSettingsButton" class="button">change</button>
+                Personal settings: <button id="personalSettingsButton" class="button">CHANGE</button>
+                <div id="goToHomePageDiv">
+                    Go to home page: 
+                    <a  href="Index.php">
+                        <button id="goToHomePageButton" class="button">HOME</button>
+                    </a>
+                </div>
             </div>
             <div class="carsSection">
               <?php
@@ -143,7 +146,6 @@ if ( $_SESSION['logged_in'] != 1 ) {
                         <button class="button" id="personalSettingsCancelButton" type="button">CANCEL</button>
                     </form>
                     <br>
-                    
                 </div>
             </div>
     </div>

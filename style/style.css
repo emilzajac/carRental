@@ -146,13 +146,24 @@ h2 {
     height: 24px;
     margin: 5px;
 }
-
-
 .inline{
     display: inline-block;
     position: relative;
     margin: 0 20px;
 }
+
+input#startPlace{
+    margin-left: 19px;
+}
+
+input#startTime{
+    margin-left: 17px;
+}
+
+#track_finish_date{
+    right: 7px;
+}
+
 #button_send{
     border: 0 none;
     font-size: 19px;

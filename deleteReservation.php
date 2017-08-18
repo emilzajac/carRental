@@ -13,6 +13,8 @@ if (!empty($_GET['car_id'])) {
     if (!$mysqliConnect->query($sql)) {
         echo "Problem with updating status in deleting reservation";
     }
+    $_SESSION['message'] = "Car was deleted from reservation";
+    header("location: userProfile.php");
 }else{
     echo 'error with deleting reservation';
 }

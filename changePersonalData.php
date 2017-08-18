@@ -75,9 +75,10 @@ if (!empty($_POST['firstNameChange']) || !empty($_POST['lastNameChange']) || !em
         }
         $_SESSION['location'] = $_POST['locationChange'];
     }
+    $_SESSION['message'] = "Personal data was changed";
     header("location: userProfile.php");
 } else {
-    header("location: userProfile.php");
+    $_SESSION['message'] = "Nothing was changed";
 }
 
 

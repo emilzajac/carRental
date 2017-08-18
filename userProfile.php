@@ -21,7 +21,7 @@ if ( $_SESSION['logged_in'] != 1 ) {
     <script src="javaScript/jsScript.js"></script>
     
   <title>Profile</title>
-
+  
 </head>
 <body>
 <img id="myImageBackground" src="img/1198.jpg" alt="">
@@ -48,48 +48,61 @@ if ( $_SESSION['logged_in'] != 1 ) {
               $query_hire = "SELECT * FROM hire WHERE client_id='$_SESSION[clientId]'";
               $result_hire = $mysqliConnect->query($query_hire);
               $hireData = $result_hire->fetch_assoc();
-              do{
-                  $query_car = "SELECT * FROM cars WHERE car_id='$hireData[car_id]'";
-                  $result_car = $mysqliConnect->query($query_car);
-                  $carData = $result_car->fetch_assoc();
-                  do{
-                  ?>
-                  <div class="gridCar">
-                      <h1><?php echo $carData['branch'] . " " .$carData['name'];?></h1>
-                      <div class="carPicture">
-                          <img  src="cars/<?php echo $carData['image'];?>">
-                      </div>
-                      <div class="carInformation">
-                          <h3>Car details:</h3>
-                          <span>category: <?php echo $carData['category'];?></span> <br>
-                          <span>number of seats: <?php echo $carData['seats'];?></span> <br>
-                          <span>number of doors: <?php echo $carData['number_of_doors'];?></span> <br>
-                          <span>fuel: <?php echo $carData['fuel'];?></span> <br>
-                          <span>gearbox: <?php echo $carData['gearbox'];?></span> <br>
-                          <span>hire cost per day: <?php echo $carData['hire_cost'] . " PLN";?></span>
+              if (!empty($hireData)) {
+                do{
+                    $query_car = "SELECT * FROM cars WHERE car_id='$hireData[car_id]'";
+                    $result_car = $mysqliConnect->query($query_car);
+                    $carData = $result_car->fetch_assoc();
+                    do{
+                    ?>
+                    <div class="gridCar">
+                        <h1><?php echo $carData['branch'] . " " .$carData['name'];?></h1>
+                        <div class="carPicture">
+                            <img  src="cars/<?php echo $carData['image'];?>">
+                        </div>
+                        <div class="carInformation">
+                            <h3>Car details:</h3>
+                            <span>category: <?php echo $carData['category'];?></span> <br>
+                            <span>number of seats: <?php echo $carData['seats'];?></span> <br>
+                            <span>number of doors: <?php echo $carData['number_of_doors'];?></span> <br>
+                            <span>fuel: <?php echo $carData['fuel'];?></span> <br>
+                            <span>gearbox: <?php echo $carData['gearbox'];?></span> <br>
+                            <span>hire cost per day: <?php echo $carData['hire_cost'] . " PLN";?></span>
 
-                          <h3>Reservation details:</h3>
-                          <h4>Rental:</h4>
-                          <span>place: <?php echo $hireData['start_place'];?></span> <br>
-                          <span>date: <?php echo $hireData['start_date'];?></span> <br>
-                          <span>time: <?php echo $hireData['start_time'];?></span> <br>
-                          <h4>Return:</h4>
-                          <span>place: <?php echo $hireData['finish_place'];?></span> <br>
-                          <span>date: <?php echo $hireData['finish_date'];?></span> <br>
-                          <span>time: <?php echo $hireData['finish_time'];?></span> <br>
-                          <br>
-                          <h4>Summary:</h4>
-                          <span>Number of rental days: <?php echo $hireData['number_of_rental_days'];?></span> <br>
-                          <span>Total price: <?php echo $hireData['total_price']." PLN";?></span> <br>
-                      </div>
-                      <a id="carSelectButton"
-                         href="deleteReservation.php?car_id=<?php echo $carData['car_id']; ?>">
-                          <button class="button" type="submit" name="deleteCarButton" >DELETE RESERVATION</button>
-                      </a>
-                  </div>
-                <?php }while($carData = $result_car->fetch_assoc());
-                }while($hireData = $result_hire->fetch_assoc()); ?>
+                            <h3>Reservation details:</h3>
+                            <h4>Rental:</h4>
+                            <span>place: <?php echo $hireData['start_place'];?></span> <br>
+                            <span>date: <?php echo $hireData['start_date'];?></span> <br>
+                            <span>time: <?php echo $hireData['start_time'];?></span> <br>
+                            <h4>Return:</h4>
+                            <span>place: <?php echo $hireData['finish_place'];?></span> <br>
+                            <span>date: <?php echo $hireData['finish_date'];?></span> <br>
+                            <span>time: <?php echo $hireData['finish_time'];?></span> <br>
+                            <br>
+                            <h4>Summary:</h4>
+                            <span>Number of rental days: <?php echo $hireData['number_of_rental_days'];?></span> <br>
+                            <span>Total price: <?php echo $hireData['total_price']." PLN";?></span> <br>
+                        </div>
+                        <a id="carSelectButton"
+                           href="deleteReservation.php?car_id=<?php echo $carData['car_id']; ?>">
+                            <button class="button" type="submit" name="deleteCarButton" >DELETE RESERVATION</button>
+                        </a>
+                    </div>
+                  <?php }while($carData = $result_car->fetch_assoc());
+                  }while($hireData = $result_hire->fetch_assoc()); 
+              }else{
+                  echo"<h1>There is no hire cars in your account jet</h1>";
+              }
+              ?>
             </div>
+           
+            <?php
+//            Display messages
+              if (!empty($_SESSION['message'])){
+                  include 'messages.php';
+            }
+            ?>
+            
             <div id="personal_data">
                 <div>
                     <h3>Your personal data</h3>

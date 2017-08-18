@@ -1,4 +1,4 @@
-//Display personal settings window when buton change is pressed
+//Display personal settings window, when button change is pressed
 window.onload = function () {
     var button = document.getElementById('personalSettingsButton');
 
@@ -22,3 +22,14 @@ window.onload = function () {
         } 
     };
 };
+
+
+//Hide message window when button is clicked
+var toggle = function () {
+    var mydiv = document.getElementById('message_form');
+    if (mydiv.style.display === 'block' || mydiv.style.display === ''){
+        mydiv.style.display = 'none';
+    }else{
+        mydiv.style.display = 'block'
+    }
+}

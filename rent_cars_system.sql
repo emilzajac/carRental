@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 06 Sie 2017, 19:36
--- Wersja serwera: 5.7.17-log
--- Wersja PHP: 5.6.28
+-- Czas generowania: 15 Sie 2017, 19:21
+-- Wersja serwera: 10.1.25-MariaDB
+-- Wersja PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `rent_cars_system`
 --
+CREATE DATABASE IF NOT EXISTS `rent_cars_system` DEFAULT CHARACTER SET utf8 COLLATE utf8_polish_ci;
+USE `rent_cars_system`;
 
 -- --------------------------------------------------------
 
@@ -48,15 +52,15 @@ INSERT INTO `cars` (`car_id`, `branch`, `name`, `category`, `number_of_doors`, `
 (1, 'Audi', 'A4', 'LUXURY', 5, 'oil', 4, 'manual', 'Audi-A4.jpg', 300, 'available'),
 (2, 'BMW', '2 series', 'LUXURY', 5, 'petrol', 4, 'automat', 'BMW-2-series.jpg', 255, 'available'),
 (3, 'Hyundai', 'i20', 'MINI', 5, 'oil', 4, 'manual', 'hyundai-i20.jpg', 100, 'available'),
-(4, 'Audi', 'Q5', 'SUV', 5, 'petrol', 4, 'automat', 'Audi-Q5.jpg', 500, 'available'),
+(4, 'Audi', 'Q5', 'SUV', 5, 'petrol', 4, 'automat', 'Audi-Q5.jpg', 500, 'Inaccessible'),
 (5, 'Mazda', '6', 'Luxury', 5, 'oil', 4, 'automat', 'Mazda-6.jpg', 325, 'Inaccessible'),
 (6, 'Suzuki', 'swift', 'MINI', 5, 'petrol', 4, 'manual', 'suzuki-swift.png', 130, 'available'),
-(7, 'Land Rover', 'Range Rover 3.0L V6', 'SUV', 5, 'petrol', 4, 'automat', 'Land-Rover.png', 830, 'available'),
-(8, 'Smart', 'cabrio', 'MINI', 3, 'petrol', 2, 'manual', 'smart.jpg', 50, 'available'),
+(7, 'Land Rover', 'Range Rover 3.0L V6', 'SUV', 5, 'petrol', 4, 'automat', 'Land-Rover.png', 830, 'Inaccessible'),
+(8, 'Smart', 'cabrio', 'MINI', 3, 'petrol', 2, 'manual', 'smart.jpg', 50, 'avaiable'),
 (9, 'Smart', 'roadster', 'MINI', 3, 'petrol', 2, 'automat', 'smart-roadster.jpg', 322, 'available'),
 (10, 'Range Rover', 'Holland & Holland', 'SUV', 5, 'oil', 5, 'automat', 'Range_Rover_Holland.png', 552, 'available'),
-(11, 'Range Rover', 'Holland & Holland', 'SUV', 5, 'petrol', 5, 'automat', 'Range_Rover_Holland.png', 552, 'Inaccessible'),
-(12, 'Audi', 'Q5', 'SUV', 5, 'petrol', 4, 'manual', 'Audi-Q5.jpg', 256, 'available'),
+(11, 'Range Rover', 'Holland & Holland', 'SUV', 5, 'petrol', 5, 'automat', 'Range_Rover_Holland.png', 552, 'available'),
+(12, 'Audi', 'Q5', 'SUV', 5, 'petrol', 4, 'manual', 'Audi-Q5.jpg', 256, 'avaiable'),
 (13, 'Ford', 'Transit', 'VAN', 4, 'oil', 3, 'manual', 'ford-transit-250.png', 203, 'available');
 
 -- --------------------------------------------------------
@@ -69,12 +73,12 @@ CREATE TABLE `hire` (
   `hire_id` int(255) NOT NULL,
   `client_id` int(255) NOT NULL,
   `car_id` int(255) NOT NULL,
-  `start_place` varchar(100) NOT NULL,
-  `finish_place` varchar(100) NOT NULL,
-  `start_date` varchar(100) NOT NULL,
-  `start_time` varchar(100) NOT NULL,
-  `finish_date` varchar(100) NOT NULL,
-  `finish_time` varchar(100) NOT NULL,
+  `start_place` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `finish_place` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `start_date` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `start_time` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `finish_date` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `finish_time` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `number_of_rental_days` int(255) NOT NULL,
   `total_price` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -84,11 +88,7 @@ CREATE TABLE `hire` (
 --
 
 INSERT INTO `hire` (`hire_id`, `client_id`, `car_id`, `start_place`, `finish_place`, `start_date`, `start_time`, `finish_date`, `finish_time`, `number_of_rental_days`, `total_price`) VALUES
-(1, 15, 8, 'qwe', 'qwe', '2017-06-29', '22:22', '2017-07-19', '22:22', 0, ''),
-(2, 2, 8, 'qwe', 'qwe', '2017-07-21', '11:11', '2017-07-13', '11:11', 0, ''),
 (3, 17, 4, 'kraków', 'kraków', '2017-07-30', '21:00', '2017-08-05', '22:00', 22, '2252'),
-(26, 2, 5, 'q', 'q', '2017-08-10', '11:01', '2017-08-25', '11:01', 15, '4875'),
-(27, 2, 8, 'qqq', 'qqq', '2017-08-02', '11:21', '2017-08-24', '12:12', 23, '1150'),
 (28, 2, 3, '222', '222', '2017-08-01', '11:01', '2017-09-01', '11:01', 31, '3100'),
 (29, 2, 4, '123', '123', '2017-08-16', '23:23', '2017-08-31', '13:21', 15, '7500'),
 (30, 36, 9, 'qwe', 'qqwe', '2017-08-01', '12:31', '2017-08-30', '12:31', 29, '9338'),
@@ -96,7 +96,10 @@ INSERT INTO `hire` (`hire_id`, `client_id`, `car_id`, `start_place`, `finish_pla
 (32, 38, 4, '1e', '12e', '2017-08-02', '12:03', '2017-08-30', '12:03', 28, '14000'),
 (33, 39, 7, '1e', '12e', '2017-08-02', '12:03', '2017-08-30', '12:03', 28, '23240'),
 (34, 40, 11, 'w', 'w', '2017-08-31', '23:23', '2017-09-02', '23:23', 2, '1104'),
-(35, 41, 5, 'warszawa', 'warszawa', '2017-08-06', '19:00', '2017-08-09', '19:00', 3, '975');
+(37, 43, 12, 'qw', 'qw', '2017-08-01', '11:21', '2017-08-16', '12:01', 16, '4096'),
+(39, 46, 7, 'Mrozy', 'Brzozy', '2017-07-24', '12:31', '2017-08-31', '12:31', 38, '31540'),
+(40, 42, 5, 'kielce', 'kielce', '2017-08-15', '15:00', '2017-08-19', '15:00', 4, '1300'),
+(41, 47, 4, 'jjh', 'jhj', '2017-08-15', '23:01', '2017-08-24', '07:59', 9, '4500');
 
 -- --------------------------------------------------------
 
@@ -106,13 +109,13 @@ INSERT INTO `hire` (`hire_id`, `client_id`, `car_id`, `start_place`, `finish_pla
 
 CREATE TABLE `users` (
   `client_id` int(255) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `date_of_birth` varchar(20) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `gender` varchar(20) NOT NULL,
-  `location` varchar(100) NOT NULL
+  `first_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `date_of_birth` varchar(20) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `gender` varchar(20) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `location` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -128,8 +131,14 @@ INSERT INTO `users` (`client_id`, `first_name`, `last_name`, `email`, `date_of_b
 (37, '123', '123', '123@gmail.com', '2017-08-02', '$2y$10$x8iYpPF4jm5l2LuIGAu3CuhA8CKo8i4RyopNYzJ5l6szU08sVqyNC', 'Male', '123'),
 (38, '123', '123e', '123ee@2.p', '2017-08-02', '$2y$10$nfG1dYlp.tO3Z7YbI9UkouAtq0BGoBbB6SQrsta6kL6e4TWi056tW', 'Male', 'qwd'),
 (39, '123', '123e', '123eewe@2.p', '2017-08-02', '$2y$10$6GmInv6ZkQpJooViVV0zJOtVUzRuuxO3yxPUvfpf/y/U7BAwl.Thq', 'Select Gender', 'qwd'),
-(40, '23', '23', '23@g.pl', '2017-08-02', '$2y$10$L6In6EfBLRG4wsi0Gv.oAuHZObqzGNYagk4QKj3YN4/.kufhItbma', 'Male', 'qw'),
-(41, 'Karolina', 'Kowalska', 'karolina@gmail.com', '1981-06-04', '$2y$10$JSLsgMb9E92Ao3GApk7ilulcYeU4AiFY31hxBu28.nDNpD1AY/xB2', 'Female', 'lublin');
+(40, 'qwr', '23', '23@g.pl', '2017-08-02', '$2y$10$L6In6EfBLRG4wsi0Gv.oAuHZObqzGNYagk4QKj3YN4/.kufhItbma', 'Male', 'qw'),
+(41, 'Karolina', 'Kowalska', 'karolina@gmail.com', '1981-06-04', '$2y$10$JSLsgMb9E92Ao3GApk7ilulcYeU4AiFY31hxBu28.nDNpD1AY/xB2', 'Female', 'lublin'),
+(42, 'Kacper', 'Bruno', 'kacper@gmail.com', '1991-07-19', '$2y$10$nGQxLzcLZwWcmSKyF2L0n.xmEnDjipekaTwzk5nnDwCSrg4lsbcxe', 'Male', 'mirzec'),
+(43, 'qwr', 'qw', 'qw@p.pl', '2017-08-01', '$2y$10$05WBhFprdXxZyTU5SRyVjOEKrMSMQI5QbrqPzdvQ1zNg/tPzcuqSm', 'Female', 'qw'),
+(44, 'RafaÅ‚', 'Brzoza', 'rafal@gmail.com', '1990-02-22', '$2y$10$W/cV0wi4Q.pNkYZGq/.C7uAnQh5.mKuuFm0NoB4Y7wVRj18NBy3EO', 'Male', 'bogatÃ³w'),
+(45, 'Rafał', 'Brzoza', 'rafals@gmail.com', '1990-02-22', '$2y$10$BIDjXBEpQ/RdLtyhxmCbE.xNpY5s8/vRewTd7PFUSdszrf661gC.2', 'Select Gender', 'bogatÃ³w'),
+(46, 'Karol', 'Karo', 'karo@gmail.com', '1990-07-20', '$2y$10$whhYTegA72t5pIr3.PSL3uzrIky.m8y2CCKztoEi8MLNwaJ90RsY.', 'Male', 'Krozno'),
+(47, '121', '23', '12@k.pl', '2017-08-10', '$2y$10$72H4lD5Wx/AoybJedpJ.1e0ySl29YmG7F.Loam4VWdITmVQtPY2sa', 'Male', '111');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -166,12 +175,13 @@ ALTER TABLE `cars`
 -- AUTO_INCREMENT dla tabeli `hire`
 --
 ALTER TABLE `hire`
-  MODIFY `hire_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `hire_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `client_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `client_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
